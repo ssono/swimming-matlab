@@ -1,0 +1,47 @@
+Ollie RH 103500-107500 newGraph('0RH853.BIN', 104500, 600, 6, 'Ollie RH snapshot')
+
+06-11 107000, 118500, 187000, 200000 RH,
+        106000, 117500, 186000, 199000 LH
+        109000, 121000, 190000, 202000 HE
+
+function newGraph(fileName, start, duration, ymag, gname)
+
+%Everything is in seconds
+[sensorData, header] = rawP5reader({fileName});
+accelData = sensorData.data;
+
+time = (start:start+duration)';
+xdat = accelData(start:start+duration, 1);
+ydat = accelData(start:start+duration, 2);
+zdat = accelData(start:start+duration, 3);
+
+vtime = (1:duration+1)';
+
+options = fitoptions('smoothingspline');
+options.SmoothingParam = .05;
+%.005 for a 50
+%.01 for a snap
+xfit = fit(time, xdat, 'smoothingspline', options);
+yfit = fit(time, ydat, 'smoothingspline', options);
+zfit = fit(time, zdat, 'smoothingspline', options);
+
+
+velo = integrate(yfit, time, start);
+
+hold on
+axis([start, start+duration, -1*ymag, ymag]);
+xlabel('seconds from start');
+ylabel('acceleration (g)');
+title(gname);
+%x = plot(xfit);
+%set(x, 'Color', [0.4 0.6, 0.8]);
+y = plot(yfit);
+set(y, 'Color', 'black');
+%z = plot(zfit);
+%set(z, 'Color', [0 0.8 0.3]);
+%v = plot(time, velo);
+%set(v, 'Color', 'red');
+%total = plot(start:start+duration, totalacc(start:start+duration), 'r');
+%legend({'x', 'y', 'z', 'v'},'Location','northeast');
+hold off
+
