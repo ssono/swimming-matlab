@@ -31,11 +31,11 @@ hold on
 axis([0, time(end), -ymag, ymag]);
 title(name);
 x = plot(xfit);
-set(x, 'Color', [0.4 0.6, 0.8]);
+set(x, 'Color', [1 0 0]);
 y = plot(yfit);
 set(y, 'Color', 'black');
 z = plot(zfit);
-set(z, 'Color', [0 0.8 0.3]);
+set(z, 'Color', [0 0 1]);
 
 xlabel("seconds (s)");
 ylabel("acceleration m/s^2");

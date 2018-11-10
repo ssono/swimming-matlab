@@ -1,0 +1,2 @@
+csvAll example
+>> csvAll('SA', 'martinez_SA_fast_full.csv', 'martinez_SA_fast_snip.csv', 'RH', 'martinez_RH_fast_full.csv', 'martinez_RH_fast_snip.csv', 'LH', 'martinez_LH_fast_full.csv', 'martinez_LH_fast_snip.csv', 50, 'Free', true, 'Martinez', '09_27', true)

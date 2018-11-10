@@ -31,11 +31,11 @@ hold on
 axis([0, duration/freq, -ymag, ymag]);
 title(gname);
 x = plot(xfit);
-set(x, 'Color', [0.4 0.6, 0.8]);
+set(x, 'Color', [1 0 0]);
 y = plot(yfit);
 set(y, 'Color', 'black');
 z = plot(zfit);
-set(z, 'Color', [0 0.8 0.3]);
+set(z, 'Color', [0 0 1]);
 
 ylabel("acceleration m/s^2");
 
@@ -59,17 +59,17 @@ gname = strcat(swimmer, {' '} ,sensor, {' '}, speed, stroke, {' '}, 'Y-normalize
 hold on
 axis([0, 100, -ymag, ymag]);
 title(gname);
-% x = plot(xfit);
-% set(x, 'Color', [0.4 0.6, 0.8]);
+x = plot(xfit);
+set(x, 'Color', [1 0 0]);
 y = plot(yfit);
 set(y, 'Color', 'black');
-% z = plot(zfit);
-% set(z, 'Color', [0 0.8 0.3]);
+z = plot(zfit);
+set(z, 'Color', [0 0 1]);
 
 ylabel("acceleration m/s^2");
 
-%legend({'x', 'y', 'z'},'Location','northeast');
-legend({'y'}, 'Location', 'northeast');
+legend({'x', 'y', 'z'},'Location','northeast');
+%legend({'y'}, 'Location', 'northeast');
 hold off
 
 name = strcat(swimmer, '_', sensor, '_', speed, stroke, '_ynormcycles');
