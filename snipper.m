@@ -55,15 +55,17 @@ xfit = fit(points, xdat, 'smoothingspline', options);
 yfit = fit(points, ydat, 'smoothingspline', options);
 zfit = fit(points, zdat, 'smoothingspline', options);
 
-ymag = 8;
+ymag = 6;
+ymin = -6;
 if sensor == 'SA'
-ymag = 4;
+ymag = 2.5;
+ymin = -1.2;
 end
 
 figure, clf
 grid on
 grid minor
-axis([start stop -ymag ymag]);
+axis([start stop ymin ymag]);
 hold on
 title(displayedPoints);
 x = plot(xfit);
@@ -74,7 +76,6 @@ z = plot(zfit);
 set(z, 'Color', [0 0 1]);
 hold off
 legend({'x', 'y', 'z'},'Location','northeast');
-
 
 saving = input('would you like to save this as a csv file? (y/n)\n', 's');
 

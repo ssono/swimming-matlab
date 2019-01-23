@@ -1,6 +1,13 @@
 function snipper(start, stop, filename, newfilename, sensor)
 
 % Takes beginning and endpoints of graph
+% Takes filename for full swim and desired name for snip file
+% Takes sensor as a two length string
+
+%if start and stop are within 1-total number of points it will graph whole
+%swim. Otherwise, it will graph your selection.
+%After the graph you will be asked if you want to save the new file.
+%Example call: snipper(8000, 00, 'alons_LH_fast_full.csv', 'alons_LH_fast_snip.csv', 'LH');
 
 allData = csvread(filename, 7, 0);
 size(allData)
@@ -45,28 +52,29 @@ zdat = accData(1:length(accData), 3);
 options = fitoptions('smoothingspline');
 options.SmoothingParam = .1/length(points);
 xfit = fit(points, xdat, 'smoothingspline', options);
-yfit = fit(points, ydat, 'smoothingspline', options);
-zfit = fit(points, zdat, 'smoothingspline', options);
 
-ymag = 8;
+
+ymag = 6;
+ymin = -6;
 if sensor == 'SA'
-ymag = 4;
+ymag = 2.5;
+ymin = -1.2;
 end
+
 
 figure, clf
 grid on
 grid minor
-axis([start stop -ymag ymag]);
+axis([start stop ymin ymag]);
 hold on
 title(displayedPoints);
 x = plot(xfit);
 set(x, 'Color', [1 0 0]);
-y = plot(yfit);
-set(y, 'Color', 'black');
-z = plot(zfit);
-set(z, 'Color', [0 0 1]);
+zero = plot(points, zeros(1,length(points)));
+set(zero, 'Color', 'black');
+
 hold off
-legend({'x', 'y', 'z'},'Location','northeast');
+legend({'x', 'zero'},'Location','northeast');
 
 
 saving = input('would you like to save this as a csv file? (y/n)\n', 's');
