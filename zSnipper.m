@@ -51,7 +51,7 @@ zdat = accData(1:length(accData), 3);
 
 options = fitoptions('smoothingspline');
 options.SmoothingParam = .1/length(points);
-xfit = fit(points, xdat, 'smoothingspline', options);
+zfit = fit(points, zdat, 'smoothingspline', options);
 
 
 ymag = 6;
@@ -68,13 +68,13 @@ grid minor
 axis([start stop ymin ymag]);
 hold on
 title(displayedPoints);
-x = plot(xfit);
-set(x, 'Color', [1 0 0]);
+z = plot(zfit);
+set(z, 'Color', [0 0 1]);
 zero = plot(points, zeros(1,length(points)));
 set(zero, 'Color', 'black');
 
 hold off
-legend({'x', 'zero'},'Location','northeast');
+legend({'z', 'zero'},'Location','northeast');
 
 
 saving = input('would you like to save this as a csv file? (y/n)\n', 's');
